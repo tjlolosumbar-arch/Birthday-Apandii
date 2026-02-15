@@ -1,256 +1,130 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Untuk Kamu 🤍</title>
-
+<title>Happy Birthday</title>
 <style>
 body {
     margin: 0;
-    font-family: 'Georgia', serif;
-    background: linear-gradient(to bottom, #e0f2fe, #ffffff);
-    overflow-x: hidden;
-}
-
-.section {
-    min-height: 100vh;
-    padding: 30px 20px;
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    padding: 0;
+    background: black;
+    color: white;
+    font-family: Arial, sans-serif;
     text-align: center;
 }
 
-.active {
-    display: flex;
+#text {
+    padding: 40px;
+    font-size: 18px;
+    white-space: pre-line;
 }
 
-/* AMPLOP */
-.envelope-container {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.envelope {
-    width: 200px;
-    height: 130px;
-    background: #60a5fa;
-    position: relative;
-    cursor: pointer;
-    border-radius: 10px;
-}
-
-.envelope:before {
-    content: "";
-    position: absolute;
-    top: -65px;
-    left: 0;
-    border-left: 100px solid transparent;
-    border-right: 100px solid transparent;
-    border-bottom: 65px solid #3b82f6;
-}
-
-/* BUTTON */
-.button {
-    margin-top: 20px;
-    padding: 10px 25px;
-    background-color: #60a5fa;
-    color: white;
-    border: none;
-    border-radius: 25px;
-    font-size: 14px;
-}
-
-/* SLIDER */
-.slider-container {
-    position: relative;
-    width: 90%;
-    max-width: 350px;
-}
-
-.slider-container img,
-.slider-container video {
-    width: 100%;
-    border-radius: 20px;
+#slideshow {
     display: none;
 }
 
-.slider-container .active-slide {
-    display: block;
+img, video {
+    max-width: 90%;
+    max-height: 90vh;
+    display: none;
+    margin-top: 20px;
 }
 
-.nav-btn {
-    margin: 10px;
-    padding: 8px 15px;
-    border-radius: 20px;
-    border: none;
-    background: #3b82f6;
-    color: white;
+.active {
+    display: block;
 }
 </style>
 </head>
-
 <body>
 
-<audio id="bgMusic" src="suara.mp3"></audio>
+<div id="text"></div>
 
-<!-- AMPLOP -->
-<div class="envelope-container" id="envelopePage">
-    <div>
-        <div class="envelope" onclick="openLetter()"></div>
-        <p style="color:#1e3a8a;">Klik amplopnya 🤍</p>
-    </div>
+<div id="slideshow">
+    <!-- 17 FOTO -->
+    <img src="1.jpeg" class="slide">
+    <img src="2.jpeg" class="slide">
+    <img src="3.jpeg" class="slide">
+    <img src="4.jpeg" class="slide">
+    <img src="5.jpeg" class="slide">
+    <img src="6.jpeg" class="slide">
+    <img src="7.jpeg" class="slide">
+    <img src="8.jpeg" class="slide">
+    <img src="9.jpeg" class="slide">
+    <img src="10.jpeg" class="slide">
+    <img src="11.jpeg" class="slide">
+    <img src="12.jpeg" class="slide">
+    <img src="13.jpeg" class="slide">
+    <img src="14.jpeg" class="slide">
+    <img src="15.jpeg" class="slide">
+    <img src="16.jpeg" class="slide">
+    <img src="17.jpeg" class="slide">
+
+    <!-- 3 VIDEO -->
+    <video class="slide" controls>
+        <source src="1.mp4" type="video/mp4">
+    </video>
+
+    <video class="slide" controls>
+        <source src="2.mp4" type="video/mp4">
+    </video>
+
+    <video class="slide" controls>
+        <source src="3.mp4" type="video/mp4">
+    </video>
 </div>
 
-<!-- SURAT -->
-<div class="section" id="letterPage">
-    <h2>Selamat Ulang Tahun 🤍</h2>
-    <p id="typingText"></p>
-    <button class="button" onclick="showPhotos()">Lihat Kenangan 📸</button>
-</div>
-
-<!-- FOTO SLIDER -->
-<div class="section" id="photoPage">
-    <h2>Kenangan 🤍</h2>
-    <div class="slider-container" id="photoSlider">
-        <!-- 17 FOTO -->
-        <img src="1.jpg" class="active-slide">
-        <img src="2.jpg">
-        <img src="3.jpg">
-        <img src="4.jpg">
-        <img src="5.jpg">
-        <img src="6.jpg">
-        <img src="7.jpg">
-        <img src="8.jpg">
-        <img src="9.jpg">
-        <img src="10.jpg">
-        <img src="11.jpg">
-        <img src="12.jpg">
-        <img src="13.jpg">
-        <img src="14.jpg">
-        <img src="15.jpg">
-        <img src="16.jpg">
-        <img src="17.jpg">
-    </div>
-
-    <div>
-        <button class="nav-btn" onclick="prevSlide('photoSlider')">Prev</button>
-        <button class="nav-btn" onclick="nextSlide('photoSlider')">Next</button>
-    </div>
-
-    <button class="button" onclick="showVideos()">Lanjut 🎥</button>
-</div>
-
-<!-- VIDEO SLIDER -->
-<div class="section" id="videoPage">
-    <h2>Untuk Kamu 🎬</h2>
-    <div class="slider-container" id="videoSlider">
-        <video controls class="active-slide">
-            <source src="1.mp4" type="video/mp4">
-        </video>
-        <video controls>
-            <source src="2.mp4" type="video/mp4">
-        </video>
-        <video controls>
-            <source src="3.mp4" type="video/mp4">
-        </video>
-    </div>
-
-    <div>
-        <button class="nav-btn" onclick="prevSlide('videoSlider')">Prev</button>
-        <button class="nav-btn" onclick="nextSlide('videoSlider')">Next</button>
-    </div>
-</div>
+<audio id="music" src="suara.mp3"></audio>
 
 <script>
-const text = `Selamat ulang tahun yaa M. Pandi Rohman 🤍
+const message = `Selamat ulang tahun yaa M. Pandi Rohman🤍   
+Semoga semua doa dan harapan kamu tercapai.   
+Semua hal yang kamu dambakan tentang masa depan itu, semoga kelak bisa terwujudkan.
+Aku yakin bisa, dengan semua kapasitas, relasi, dan skill yang kamu punya, kamu harus yakin.
+Selama kamu tidak lupa untuk berdoa dan beribdah, in syaa Allah semua hal baik senantiasa ku doakan menyertaimu selalu. 
+Jaga kesehatan, tolong jangan malas makan, jangan stress-stress, kasihan inak sama amak, kamu sayangkan sama mereka? 
+Maka setidaknya kamu bisa sehat untuk mereka, sayangi diri kamu ya, karena sesayang apapun aku ke kamu, kalau memang sudah sampai di titik aku jenuh dan semua ini usai, hanya kamu yang bisa lebih sayang dengan diri kamu sendiri. Jikalau memang nanti kita akan "asing" semoga kamu bisa lebih "aware" dengan diri kamu sendiri :>
+Terima kasih sudah hadir dan memberi pelajaran, rasa serta warna baru. 
+Sehat dan sukses selalu dimanapun berada, mungkin memang tidak ada kata "kita" 
+Tapi, semua momen yang sudah dijalani cukup buat aku merasakan bahwa "kita" itu pernah ada.
+Kamu terasa begitu susah digapai, terimakasih sudah memberi sedikit ruang agar aku bisa seidkit mengusik dan hadir di ruang dalam hidup mu.
+Aku yakin kamu bisa dan senantiasa kuat, semoga siapapun nanti yang akan membersamai mu, semoga bahagia selalu. 
+Al-fatihah untuk bertambahya usia mu.
+ 
+a girl who's love u: Sasii`;
 
-    Semoga semua doa dan harapan kamu tercapai.  
-    Semua hal yang kamu dambakan tentang masa depan itu, semoga kelak bisa terwujud.  
-    Aku yakin bisa, dengan semua kapasitas, relasi, dan skill 
-    yang kamu punya, kamu harus yakin. 
-
-    Selama kamu tidak lupa untuk berdoa dan beribadah, in syaa Allah semua hal baik
-    senantiasa ku doakan menyertaimu selalu.  
-    Jaga kesehatan, tolong jangan malas makan, jangan stres-stres.  
-    Kasihan inak sama amak, kamu sayang kan sama mereka?  
-    Maka setidaknya kamu bisa sehat untuk mereka. 
-
-    Sayangi diri kamu ya, karena sesayang apapun aku ke kamu,  
-    kalau memang sudah sampai di titik aku jenuh dan semua ini usai,  
-    Hanya kamu yang bisa lebih sayang kepada diri kamu sendiri.  
-    Jikalau memang nanti kita akan "asing",  
-    semoga kamu bisa lebih aware dengan diri kamu sendiri :> 
-
-    Terima kasih sudah hadir dan memberi pelajaran, rasa, serta warna baru.  
-    Sehat dan sukses selalu di mana pun berada.  
-    Mungkin memang tidak ada kata "kita",  
-    tapi semua momen yang sudah dijalani cukup buat aku 
-    Merasakan bahwa "kita" itu pernah ada. 
-
-    Kamu terasa begitu susah digapai,  
-    terima kasih sudah memberi sedikit ruang agar aku bisa sedikit 
-    Mengusik dan hadir di ruang dalam hidupmu.  
-    Aku yakin kamu bisa dan senantiasa kuat.  
-    Semoga siapapun nanti yang akan membersamai mu, 
-    semoga bahagia selalu. 
-
-    Al-Fatihah untuk bertambahnya usiamu. 
-
-   a girl who loves you:<br> Sasii 🤍;
 let i = 0;
+const speed = 40;
+const textElement = document.getElementById("text");
+const music = document.getElementById("music");
 
 function typeWriter() {
-    if (i < text.length) {
-        document.getElementById("typingText").innerHTML += text.charAt(i);
+    if (i < message.length) {
+        textElement.innerHTML += message.charAt(i);
         i++;
-        setTimeout(typeWriter, 30);
+        setTimeout(typeWriter, speed);
+    } else {
+        setTimeout(startSlideshow, 2000);
     }
 }
 
-function openLetter() {
-    document.getElementById("envelopePage").style.display = "none";
-    document.getElementById("letterPage").classList.add("active");
-    document.getElementById("bgMusic").play();
-    typeWriter();
+function startSlideshow() {
+    document.getElementById("text").style.display = "none";
+    document.getElementById("slideshow").style.display = "block";
+    music.play();
+
+    const slides = document.querySelectorAll(".slide");
+    let index = 0;
+    slides[index].classList.add("active");
+
+    setInterval(() => {
+        slides[index].classList.remove("active");
+        index = (index + 1) % slides.length;
+        slides[index].classList.add("active");
+    }, 4000);
 }
 
-function showPhotos() {
-    document.getElementById("letterPage").style.display = "none";
-    document.getElementById("photoPage").classList.add("active");
-}
-
-function showVideos() {
-    document.getElementById("photoPage").style.display = "none";
-    document.getElementById("videoPage").classList.add("active");
-}
-
-function nextSlide(id) {
-    const slides = document.querySelectorAll(`#${id} img, #${id} video`);
-    let current = 0;
-    slides.forEach((slide, index) => {
-        if (slide.classList.contains("active-slide")) current = index;
-        slide.classList.remove("active-slide");
-    });
-    slides[(current + 1) % slides.length].classList.add("active-slide");
-}
-
-function prevSlide(id) {
-    const slides = document.querySelectorAll(`#${id} img, #${id} video`);
-    let current = 0;
-    slides.forEach((slide, index) => {
-        if (slide.classList.contains("active-slide")) current = index;
-        slide.classList.remove("active-slide");
-    });
-    slides[(current - 1 + slides.length) % slides.length].classList.add("active-slide");
-}
+typeWriter();
 </script>
 
 </body>
 </html>
-
-
