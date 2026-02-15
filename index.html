@@ -3,80 +3,82 @@
 <head>
 <meta charset="UTF-8">
 <title>Happy Birthday</title>
+
 <style>
 body {
     margin: 0;
     padding: 0;
-    background: black;
-    color: white;
-    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #cfe9ff, #eaf6ff);
+    font-family: 'Segoe UI', sans-serif;
     text-align: center;
+    color: #2c3e50;
 }
 
-#text {
+/* Amplop */
+#envelope {
+    font-size: 90px;
+    cursor: pointer;
+    margin-top: 150px;
+    transition: transform 0.3s ease;
+}
+
+#envelope:hover {
+    transform: scale(1.2);
+}
+
+/* Teks */
+#content {
+    display: none;
     padding: 40px;
-    font-size: 18px;
     white-space: pre-line;
+    font-size: 18px;
+    line-height: 1.8;
 }
 
+/* Slideshow */
 #slideshow {
     display: none;
 }
 
-img, video {
-    max-width: 90%;
-    max-height: 90vh;
+.slide {
     display: none;
+    max-width: 85%;
+    max-height: 75vh;
     margin-top: 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
 .active {
     display: block;
 }
+
+/* Tombol */
+button {
+    margin-top: 25px;
+    padding: 12px 25px;
+    font-size: 16px;
+    border: none;
+    border-radius: 25px;
+    background-color: #89c8ff;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #5fb2ff;
+    transform: scale(1.05);
+}
 </style>
 </head>
+
 <body>
 
-<div id="text"></div>
+<div id="envelope">💌</div>
 
-<div id="slideshow">
-    <!-- 17 FOTO -->
-    <img src="1.jpeg" class="slide">
-    <img src="2.jpeg" class="slide">
-    <img src="3.jpeg" class="slide">
-    <img src="4.jpeg" class="slide">
-    <img src="5.jpeg" class="slide">
-    <img src="6.jpeg" class="slide">
-    <img src="7.jpeg" class="slide">
-    <img src="8.jpeg" class="slide">
-    <img src="9.jpeg" class="slide">
-    <img src="10.jpeg" class="slide">
-    <img src="11.jpeg" class="slide">
-    <img src="12.jpeg" class="slide">
-    <img src="13.jpeg" class="slide">
-    <img src="14.jpeg" class="slide">
-    <img src="15.jpeg" class="slide">
-    <img src="16.jpeg" class="slide">
-    <img src="17.jpeg" class="slide">
-
-    <!-- 3 VIDEO -->
-    <video class="slide" controls>
-        <source src="1.mp4" type="video/mp4">
-    </video>
-
-    <video class="slide" controls>
-        <source src="2.mp4" type="video/mp4">
-    </video>
-
-    <video class="slide" controls>
-        <source src="3.mp4" type="video/mp4">
-    </video>
-</div>
-
-<audio id="music" src="suara.mp3"></audio>
-
-<script>
-const message = `Selamat ulang tahun yaa M. Pandi Rohman🤍   
+<div id="content">
+Selamat ulang tahun yaa M. Pandi Rohman🤍   
 Semoga semua doa dan harapan kamu tercapai.   
 Semua hal yang kamu dambakan tentang masa depan itu, semoga kelak bisa terwujudkan.
 Aku yakin bisa, dengan semua kapasitas, relasi, dan skill yang kamu punya, kamu harus yakin.
@@ -89,41 +91,78 @@ Tapi, semua momen yang sudah dijalani cukup buat aku merasakan bahwa "kita" itu 
 Kamu terasa begitu susah digapai, terimakasih sudah memberi sedikit ruang agar aku bisa seidkit mengusik dan hadir di ruang dalam hidup mu.
 Aku yakin kamu bisa dan senantiasa kuat, semoga siapapun nanti yang akan membersamai mu, semoga bahagia selalu. 
 Al-fatihah untuk bertambahya usia mu.
- 
-a girl who's love u: Sasii`;
 
-let i = 0;
-const speed = 40;
-const textElement = document.getElementById("text");
-const music = document.getElementById("music");
+a girl who's love u: Sasii
 
-function typeWriter() {
-    if (i < message.length) {
-        textElement.innerHTML += message.charAt(i);
-        i++;
-        setTimeout(typeWriter, speed);
-    } else {
-        setTimeout(startSlideshow, 2000);
-    }
-}
+<br><br>
+<button onclick="startSlide()">Lihat Kenangan 🩵</button>
+</div>
 
-function startSlideshow() {
-    document.getElementById("text").style.display = "none";
+<div id="slideshow">
+
+<img src="1.jpeg" class="slide active">
+<img src="2.jpeg" class="slide">
+<img src="3.jpeg" class="slide">
+<img src="4.jpeg" class="slide">
+<img src="5.jpeg" class="slide">
+<img src="6.jpeg" class="slide">
+<img src="7.jpeg" class="slide">
+<img src="8.jpeg" class="slide">
+<img src="9.jpeg" class="slide">
+<img src="10.jpeg" class="slide">
+<img src="11.jpeg" class="slide">
+<img src="12.jpeg" class="slide">
+<img src="13.jpeg" class="slide">
+<img src="14.jpeg" class="slide">
+<img src="15.jpeg" class="slide">
+<img src="16.jpeg" class="slide">
+<img src="17.jpeg" class="slide">
+
+<video class="slide" controls>
+    <source src="1.mp4" type="video/mp4">
+</video>
+
+<video class="slide" controls>
+    <source src="2.mp4" type="video/mp4">
+</video>
+
+<video class="slide" controls>
+    <source src="3.mp4" type="video/mp4">
+</video>
+
+<br>
+<button onclick="nextSlide()">Next ➡</button>
+
+</div>
+
+<audio id="music" src="suara.mp3"></audio>
+
+<script>
+let currentSlide = 0;
+const slides = document.querySelectorAll(".slide");
+
+document.getElementById("envelope").onclick = function() {
+    document.getElementById("envelope").style.display = "none";
+    document.getElementById("content").style.display = "block";
+    document.getElementById("music").play();
+};
+
+function startSlide() {
+    document.getElementById("content").style.display = "none";
     document.getElementById("slideshow").style.display = "block";
-    music.play();
-
-    const slides = document.querySelectorAll(".slide");
-    let index = 0;
-    slides[index].classList.add("active");
-
-    setInterval(() => {
-        slides[index].classList.remove("active");
-        index = (index + 1) % slides.length;
-        slides[index].classList.add("active");
-    }, 4000);
 }
 
-typeWriter();
+function nextSlide() {
+    slides[currentSlide].classList.remove("active");
+    currentSlide++;
+
+    if (currentSlide >= slides.length) {
+        window.location.href = "https://wa.me/6285271960542?text=Terima%20kasih%20sudah%20membuka%20semuanya%20🤍";
+        return;
+    }
+
+    slides[currentSlide].classList.add("active");
+}
 </script>
 
 </body>
