@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Kamu 🤍</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    background: linear-gradient(to bottom, #e0f2fe, #ffffff);
+    overflow-x: hidden;
+}
+
+.section {
+    min-height: 100vh;
+    padding: 30px 20px;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.active {
+    display: flex;
+}
+
+/* AMPLOP */
+.envelope-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.envelope {
+    width: 200px;
+    height: 130px;
+    background: #60a5fa;
+    position: relative;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.envelope:before {
+    content: "";
+    position: absolute;
+    top: -65px;
+    left: 0;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-bottom: 65px solid #3b82f6;
+}
+
+/* BUTTON */
+.button {
+    margin-top: 20px;
+    padding: 10px 25px;
+    background-color: #60a5fa;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 14px;
+}
+
+/* SLIDER */
+.slider-container {
+    position: relative;
+    width: 90%;
+    max-width: 350px;
+}
+
+.slider-container img,
+.slider-container video {
+    width: 100%;
+    border-radius: 20px;
+    display: none;
+}
+
+.slider-container .active-slide {
+    display: block;
+}
+
+.nav-btn {
+    margin: 10px;
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: none;
+    background: #3b82f6;
+    color: white;
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic" src="suara.mp3"></audio>
+
+<!-- AMPLOP -->
+<div class="envelope-container" id="envelopePage">
+    <div>
+        <div class="envelope" onclick="openLetter()"></div>
+        <p style="color:#1e3a8a;">Klik amplopnya 🤍</p>
+    </div>
+</div>
+
+<!-- SURAT -->
+<div class="section" id="letterPage">
+    <h2>Selamat Ulang Tahun 🤍</h2>
+    <p id="typingText"></p>
+    <button class="button" onclick="showPhotos()">Lihat Kenangan 📸</button>
+</div>
+
+<!-- FOTO SLIDER -->
+<div class="section" id="photoPage">
+    <h2>Kenangan 🤍</h2>
+    <div class="slider-container" id="photoSlider">
+        <!-- 17 FOTO -->
+        <img src="foto1.jpg" class="active-slide">
+        <img src="foto2.jpg">
+        <img src="foto3.jpg">
+        <img src="foto4.jpg">
+        <img src="foto5.jpg">
+        <img src="foto6.jpg">
+        <img src="foto7.jpg">
+        <img src="foto8.jpg">
+        <img src="foto9.jpg">
+        <img src="foto10.jpg">
+        <img src="foto11.jpg">
+        <img src="foto12.jpg">
+        <img src="foto13.jpg">
+        <img src="foto14.jpg">
+        <img src="foto15.jpg">
+        <img src="foto16.jpg">
+        <img src="foto17.jpg">
+    </div>
+
+    <div>
+        <button class="nav-btn" onclick="prevSlide('photoSlider')">Prev</button>
+        <button class="nav-btn" onclick="nextSlide('photoSlider')">Next</button>
+    </div>
+
+    <button class="button" onclick="showVideos()">Lanjut 🎥</button>
+</div>
+
+<!-- VIDEO SLIDER -->
+<div class="section" id="videoPage">
+    <h2>Untuk Kamu 🎬</h2>
+    <div class="slider-container" id="videoSlider">
+        <video controls class="active-slide">
+            <source src="video1.mp4" type="video/mp4">
+        </video>
+        <video controls>
+            <source src="video2.mp4" type="video/mp4">
+        </video>
+        <video controls>
+            <source src="video3.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div>
+        <button class="nav-btn" onclick="prevSlide('videoSlider')">Prev</button>
+        <button class="nav-btn" onclick="nextSlide('videoSlider')">Next</button>
+    </div>
+</div>
+
+<script>
+const text = `Selamat ulang tahun yaa M. Pandi Rohman 🤍
+
+Semoga semua doa dan harapan kamu tercapai.
+Sehat dan sukses selalu.
+
+a girl who's love u:
+Sasii 🤍`;
+
+let i = 0;
+
+function typeWriter() {
+    if (i < text.length) {
+        document.getElementById("typingText").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 30);
+    }
+}
+
+function openLetter() {
+    document.getElementById("envelopePage").style.display = "none";
+    document.getElementById("letterPage").classList.add("active");
+    document.getElementById("bgMusic").play();
+    typeWriter();
+}
+
+function showPhotos() {
+    document.getElementById("letterPage").style.display = "none";
+    document.getElementById("photoPage").classList.add("active");
+}
+
+function showVideos() {
+    document.getElementById("photoPage").style.display = "none";
+    document.getElementById("videoPage").classList.add("active");
+}
+
+function nextSlide(id) {
+    const slides = document.querySelectorAll(`#${id} img, #${id} video`);
+    let current = 0;
+    slides.forEach((slide, index) => {
+        if (slide.classList.contains("active-slide")) current = index;
+        slide.classList.remove("active-slide");
+    });
+    slides[(current + 1) % slides.length].classList.add("active-slide");
+}
+
+function prevSlide(id) {
+    const slides = document.querySelectorAll(`#${id} img, #${id} video`);
+    let current = 0;
+    slides.forEach((slide, index) => {
+        if (slide.classList.contains("active-slide")) current = index;
+        slide.classList.remove("active-slide");
+    });
+    slides[(current - 1 + slides.length) % slides.length].classList.add("active-slide");
+}
+</script>
+
+</body>
+</html>
