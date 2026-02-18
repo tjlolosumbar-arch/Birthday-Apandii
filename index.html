@@ -2,85 +2,129 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Birthday</title>
 
 <style>
 body {
     margin: 0;
     padding: 0;
-    background: linear-gradient(to bottom, #cfe9ff, #eaf6ff);
     font-family: 'Segoe UI', sans-serif;
     text-align: center;
-    color: #2c3e50;
+    color: white;
+    overflow-x: hidden;
 }
 
-/* Amplop */
+/* Background blur dari foto */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("1.jpeg") center/cover no-repeat;
+    filter: blur(8px) brightness(0.5);
+    z-index: -1;
+}
+
+/* HALAMAN AWAL */
+#home {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 #envelope {
-    font-size: 90px;
+    font-size: 140px;
     cursor: pointer;
-    margin-top: 150px;
-    transition: transform 0.3s ease;
+    transition: 0.3s;
 }
 
 #envelope:hover {
     transform: scale(1.2);
 }
 
-/* Teks */
-#content {
-    display: none;
-    padding: 40px;
-    white-space: pre-line;
-    font-size: 18px;
-    line-height: 1.8;
+#openText {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    margin-top: 15px;
 }
 
-/* Slideshow */
+/* SURAT */
+#content {
+    display: none;
+    min-height: 100vh;
+    padding: 40px 25px;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 2;
+    background: rgba(0,0,0,0.35);
+    border-radius: 20px;
+}
+
+/* SLIDESHOW */
 #slideshow {
     display: none;
     height: 100vh;
-    display: flex;
     flex-direction: column;
-    justify-content: center;   /* tengah vertikal */
-    align-items: center;       /* tengah horizontal */
+    justify-content: center;
+    align-items: center;
 }
 
 .slide {
     display: none;
-    max-width: 80%;
-    max-height: 70vh;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    max-width: 85%;
+    max-height: 75vh;
+    border-radius: 25px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
 }
 
 .active {
     display: block;
 }
 
-/* Tombol */
+/* Slide teks terakhir */
+.end-text {
+    font-size: 28px;
+    font-weight: 700;
+    padding: 20px;
+}
+
+/* TOMBOL */
 button {
-    margin-top: 25px;
-    padding: 12px 25px;
-    font-size: 16px;
+    margin-top: 35px;
+    padding: 18px 50px;
+    font-size: 18px;
+    font-weight: 700;
     border: none;
-    border-radius: 25px;
-    background-color: #89c8ff;
+    border-radius: 35px;
+    background-color: #6fbfff;
     color: white;
     cursor: pointer;
     transition: 0.3s;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
 button:hover {
-    background-color: #5fb2ff;
-    transform: scale(1.05);
+    background-color: #4ea8ff;
+    transform: scale(1.08);
 }
 </style>
 </head>
 
 <body>
 
-<div id="envelope">💌</div>
+<!-- HOME -->
+<div id="home">
+    <div id="envelope">💌</div>
+    <div id="openText">OPEN</div>
+</div>
 
+<!-- SURAT -->
 <div id="content">
 Selamat ulang tahun yaa M. Pandi Rohman🤍   
 Semoga semua doa dan harapan kamu tercapai.   
@@ -89,19 +133,25 @@ Aku yakin bisa, dengan semua kapasitas, relasi, dan skill yang kamu punya, kamu 
 Selama kamu tidak lupa untuk berdoa dan beribadah, insya Allah semua hal baik senantiasa ku doakan menyertaimu selalu. 
 Jaga kesehatan, tolong jangan malas makan, jangan stres-stres, kasihan inak sama amak, kamu sayangkan sama mereka? 
 Maka setidaknya kamu bisa sehat untuk mereka, sayangi diri kamu ya, karena sesayang apapun aku ke kamu, kalau memang sudah sampai di titik aku jenuh dan semua ini usai, hanya kamu yang bisa lebih sayang dengan diri kamu sendiri. Jikalau memang nanti kita akan "asing" semoga kamu bisa lebih "aware" dengan diri kamu sendiri :>
+
 Terima kasih sudah hadir dan memberi pelajaran, rasa, serta warna baru. 
 Sehat dan sukses selalu dimanapun berada, mungkin memang tidak ada kata "kita" 
+
 Tapi semua momen yang sudah dijalani cukup buat aku merasakan bahwa "kita" itu pernah ada.
+
 Kamu terasa begitu susah digapai, terima kasih sudah memberi sedikit ruang agar aku bisa sedikit mengusik dan hadir di ruang dalam hidupmu.
+
 Aku yakin kamu bisa dan senantiasa kuat, semoga siapapun nanti yang akan membersamai mu, semoga bahagia selalu. 
+
 Al-fatihah untuk bertambahnya usiamu.
 
 a girl who loves you: Sasii
 
 <br><br>
-<button onclick="startSlide()">Lihat Kenangan 🩵</button>
+<button onclick="startSlide()">Buka Kenangan Kita 🩵</button>
 </div>
 
+<!-- SLIDES -->
 <div id="slideshow">
 
 <img src="1.jpeg" class="slide active">
@@ -134,6 +184,11 @@ a girl who loves you: Sasii
     <source src="3.mp4" type="video/mp4">
 </video>
 
+<!-- SLIDE TERAKHIR -->
+<div class="slide end-text">
+MAKASIH UDAH JADI BAGIAN DARI HIDUP AKU 🤍
+</div>
+
 <br>
 <button onclick="nextSlide()">Next ➡</button>
 
@@ -146,14 +201,14 @@ let currentSlide = 0;
 const slides = document.querySelectorAll(".slide");
 
 document.getElementById("envelope").onclick = function() {
-    document.getElementById("envelope").style.display = "none";
+    document.getElementById("home").style.display = "none";
     document.getElementById("content").style.display = "block";
     document.getElementById("music").play();
 };
 
 function startSlide() {
     document.getElementById("content").style.display = "none";
-    document.getElementById("slideshow").style.display = "block";
+    document.getElementById("slideshow").style.display = "flex";
 }
 
 function nextSlide() {
@@ -161,14 +216,18 @@ function nextSlide() {
     currentSlide++;
 
     if (currentSlide >= slides.length) {
-        window.location.href = "https://wa.me/6285271960542?text=Terima%20kasih%20sudah%20membuka%20semuanya%20🤍";
         return;
     }
 
     slides[currentSlide].classList.add("active");
+
+    if (currentSlide === slides.length - 1) {
+        setTimeout(() => {
+            window.location.href = "https://wa.me/6285271960542?text=Terima%20kasih%20sudah%20membuka%20semuanya%20🤍";
+        }, 3000);
+    }
 }
 </script>
 
 </body>
 </html>
-
